@@ -1,6 +1,10 @@
 # Brancher
 
-A rubygem to switch databases connected with ActiveRecord by Git branch
+[![Build Status](https://travis-ci.org/naoty/brancher.svg)](https://travis-ci.org/naoty/brancher)
+
+Brancher is a rubygem to switch databases connected with ActiveRecord by Git branch.
+
+For example, if the name of a database is `sample_app_dev`, Brancher will switch the database to `sample_app_dev_master` at `master` branch, and `sample_app_dev_some_feature` at `some_feature` branch.
 
 ## Installation
 
@@ -17,10 +21,6 @@ And then execute:
 ```
 $ bundle
 ```
-
-## Usage
-
-For example, if the name of a database is `sample_app_dev`, Brancher will switch the database to `sample_app_dev_master` at `master` branch, and `sample_app_dev_some_feature` at `some_feature` branch.
 
 ## Contributing
 
