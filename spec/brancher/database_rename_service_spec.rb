@@ -39,8 +39,14 @@ describe Brancher::DatabaseRenameService do
     end
 
     let(:new_configurations) do
-      configurations[env]["database"] = new_database_name
-      configurations
+      {
+        env => {
+          "adapter" => adapter,
+          "pool" => 5,
+          "timeout" => 5000,
+          "database" => new_database_name
+        }
+      }
     end
 
     subject do
@@ -60,6 +66,14 @@ describe Brancher::DatabaseRenameService do
 
       let(:new_database_name) do
         "#{database_name}_#{branch}"
+      end
+
+      it { is_expected.to eq new_configurations }
+    end
+
+    context "when a database has already renamed" do
+      let(:database_name) do
+        "db/sample_app_development_#{branch}.sqlite3"
       end
 
       it { is_expected.to eq new_configurations }

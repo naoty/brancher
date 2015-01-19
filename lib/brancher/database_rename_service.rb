@@ -8,15 +8,19 @@ module Brancher
       configuration = configurations[env]
       database_extname = File.extname(configuration["database"])
       database_name = configuration["database"].gsub(%r{#{database_extname}$}) { "" }
-      database_name += "_#{current_branch}"
+      database_name += suffix unless database_name =~ %r{#{suffix}$}
       configuration["database"] = database_name + database_extname
-      configurations.merge!(env => configuration)
+      configurations
     end
 
     private
 
     def env
       Rails.env
+    end
+
+    def suffix
+      "_#{current_branch}"
     end
 
     def current_branch
