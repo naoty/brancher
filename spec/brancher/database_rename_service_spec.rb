@@ -3,8 +3,10 @@ require "spec_helper"
 describe Brancher::DatabaseRenameService do
   describe ".rename" do
     before do
-      allow(Brancher::DatabaseRenameService).to receive(:current_branch)
-        .and_return(branch)
+      allow(Brancher::DatabaseRenameService).to receive_messages(
+        current_branch: branch,
+        env: env
+      )
     end
 
     let(:configurations) do
