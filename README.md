@@ -1,6 +1,7 @@
 # Brancher
 
 [![Build Status](https://travis-ci.org/naoty/brancher.svg)](https://travis-ci.org/naoty/brancher)
+[![Code Climate](https://codeclimate.com/github/naoty/brancher/badges/gpa.svg)](https://codeclimate.com/github/naoty/brancher)
 
 Brancher is a rubygem to switch databases connected with ActiveRecord by Git branch.
 
