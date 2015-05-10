@@ -13,14 +13,17 @@ module Brancher
       configurations
     end
 
+    def suffix
+      return nil if current_branch.blank?
+      return nil if Brancher.config.except_branches.include?(current_branch)
+
+      "_#{current_branch}"
+    end
+
     private
 
     def env
       Rails.env
-    end
-
-    def suffix
-      "_#{current_branch}"
     end
 
     def current_branch
