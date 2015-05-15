@@ -26,7 +26,7 @@ $ bundle
 ## Configuration
 
 ```ruby
-# config/initializer/brancher.rb
+# config/environments/development.rb
 
 Brancher.configure do |c|
   # if branch is "master" or "develop", database name has no suffix.
