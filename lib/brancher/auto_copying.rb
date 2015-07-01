@@ -43,11 +43,11 @@ module Brancher
 
         cmd = ["mysqldump", "-u", config[:username]]
         cmd.concat(["-h", config[:host]]) if config[:host].present?
-        cmd.concat(["-p", config[:password]]) if config[:password].present?
+        cmd.concat(["-p#{config[:password]}"]) if config[:password].present?
         cmd << original_database_name
         cmd.concat(["|", "mysql", "-u", config[:username]])
         cmd.concat(["-h", config[:host]]) if config[:host].present?
-        cmd.concat(["-p", config[:password]]) if config[:password].present?
+        cmd.concat(["-p#{config[:password]}"]) if config[:password].present?
         cmd << database_name
         system(cmd.join(" "))
       end
