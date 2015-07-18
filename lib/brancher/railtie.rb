@@ -10,9 +10,16 @@ module Brancher
     rake_tasks do
       namespace :db do
         task :load_config do
+          require_environment!
           DatabaseRenameService.rename!(ActiveRecord::Base.configurations)
         end
       end
+    end
+
+    def require_environment!
+      return unless defined? Rails
+      environemnt = "#{Rails.root}/config/environments/#{Rails.env}.rb"
+      require environemnt if File.exists?(environemnt)
     end
   end
 end
