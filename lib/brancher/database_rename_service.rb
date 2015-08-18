@@ -6,9 +6,12 @@ module Brancher
 
     def rename!(configurations)
       configuration = configurations[env]
+      configuration["original_database"] = configuration["database"]
       configuration["database"] = database_name(configuration)
       configurations
     end
+
+    private
 
     def database_name_with_suffix(configuration)
       database_extname = File.extname(configuration["database"])
@@ -18,8 +21,6 @@ module Brancher
       database_name = database_name.slice(0,Brancher.config.max_database_name_length-22) + [Digest::MD5.digest(database_name)].pack("m0").slice(0,22) if database_name.length > Brancher.config.max_database_name_length
       database_name
     end
-
-    private
 
     def suffix
       return nil if current_branch.blank?
