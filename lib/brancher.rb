@@ -6,6 +6,7 @@ module Brancher
   include ActiveSupport::Configurable
   config.except_branches ||= []
   config.auto_copy ||= false
+  config.max_database_name_length ||= 63
 end
 
 require "brancher/database_configuration_renaming"
