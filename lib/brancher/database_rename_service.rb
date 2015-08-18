@@ -22,10 +22,9 @@ module Brancher
 
     private
 
-    def cap_length(database_full_name)
-      max_length = 63
-      database_full_name = database_full_name.slice(0,max_length-22) + [Digest::MD5.digest(database_full_name)].pack("m0").slice(0,22) if database_full_name.length > max_length
-      database_full_name
+    def cap_length(database_name)
+      database_name = database_name.slice(0,Brancher.config.max_database_name_length-22) + [Digest::MD5.digest(database_name)].pack("m0").slice(0,22) if database_name.length > Brancher.config.max_database_name_length
+      database_name
     end
 
     def env
