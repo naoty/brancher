@@ -92,7 +92,7 @@ describe Brancher::DatabaseRenameService do
       end
 
       let(:new_database_name) do
-        "this_is_a_very_long_sample_app_developmen#{[Digest::MD5.digest("#{database_name}_#{branch}")].pack('m0').slice(0,22)}"
+        "this_is_a_very_long_sample_app_developmen#{[Digest::MD5.digest("#{database_name}_#{branch}")].pack('m0').slice(0,22).gsub(/[^\w]/, '_')}"
       end
 
       it { is_expected.to eq new_configurations }
