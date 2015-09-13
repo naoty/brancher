@@ -4,8 +4,8 @@ module Brancher
   module DatabaseRenameService
     extend self
 
-    def rename!(configurations)
-      configuration = configurations[env]
+    def rename!(configurations, key = env)
+      configuration = configurations[key]
       configuration["original_database"] = configuration["database"]
       configuration["database"] = database_name_with_suffix(configuration["database"])
       configurations

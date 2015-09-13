@@ -10,6 +10,7 @@ module Brancher
 end
 
 require "brancher/database_configuration_renaming"
+require "brancher/multiple_database_configuration_renaming"
 require "brancher/database_rename_service"
 require "brancher/auto_copying"
 require "brancher/railtie"
