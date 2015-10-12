@@ -97,5 +97,29 @@ describe Brancher::DatabaseRenameService do
 
       it { is_expected.to eq new_configurations }
     end
+
+    context "when it connect another database" do
+      let(:adapter) do
+        "mysql2"
+      end
+
+      let(:database_name) do
+        "sample_app_another_db"
+      end
+
+      let(:new_database_name) do
+        "#{database_name}_#{branch}"
+      end
+
+      let(:env) do
+        "another_db"
+      end
+
+      subject do
+        Brancher::DatabaseRenameService.rename!(configurations, env)
+      end
+
+      it { is_expected.to eq new_configurations }
+    end
   end
 end
