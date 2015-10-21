@@ -24,11 +24,10 @@ module Brancher
       end
 
       def auto_copy
-        suffix = Brancher::DatabaseRenameService.suffix
-        return unless suffix
+        return if config[:database] == config[:original_database]
 
         database_name = config[:database]
-        original_database_name = database_name.gsub(Regexp.new(suffix), "")
+        original_database_name = config[:original_database]
 
         case config[:adapter]
         when /mysql/

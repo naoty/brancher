@@ -46,7 +46,8 @@ describe Brancher::DatabaseRenameService do
           "adapter" => adapter,
           "pool" => 5,
           "timeout" => 5000,
-          "database" => new_database_name
+          "database" => new_database_name,
+          "original_database" => database_name
         }
       }
     end
@@ -76,6 +77,22 @@ describe Brancher::DatabaseRenameService do
     context "when a database has already renamed" do
       let(:database_name) do
         "db/sample_app_development_#{branch}.sqlite3"
+      end
+
+      it { is_expected.to eq new_configurations }
+    end
+
+    context "when the database name is longer than max_database_name_length" do
+      let(:adapter) do
+        "mysql2"
+      end
+
+      let(:database_name) do
+        "this_is_a_very_long_sample_app_development_database_name_that_exceeds_the_default_set_max_database_name_length"
+      end
+
+      let(:new_database_name) do
+        "this_is_a_very_long_sample_app_developmen#{[Digest::MD5.digest("#{database_name}_#{branch}")].pack('m0').slice(0,22).gsub(/[^\w]/, '_').downcase}"
       end
 
       it { is_expected.to eq new_configurations }
