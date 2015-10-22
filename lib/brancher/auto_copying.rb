@@ -38,7 +38,7 @@ module Brancher
       end
 
       def mysql_copy(original_database_name, database_name)
-        system("bundle", "exec", "rake", "db:create")
+        ActiveRecord::Tasks::DatabaseTasks.create(config.with_indifferent_access)
 
         cmd = ["mysqldump", "-u", config[:username]]
         cmd.concat(["-h", config[:host]]) if config[:host].present?

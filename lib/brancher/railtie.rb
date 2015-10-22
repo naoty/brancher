@@ -4,6 +4,7 @@ module Brancher
   class Railtie < Rails::Railtie
     initializer "brancher.rename_database", before: "active_record.initialize_database" do
       Rails::Application::Configuration.send(:prepend, DatabaseConfigurationRenaming)
+      ActiveRecord::Base.send(:prepend, MultipleDatabaseConfigurationRenaming)
       ActiveRecord::ConnectionAdapters::ConnectionPool.send(:prepend, AutoCopying)
     end
 
